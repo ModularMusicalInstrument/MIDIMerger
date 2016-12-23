@@ -1,0 +1,94 @@
+MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         ;list           p=18f4320       ; list directive to define processor
+                      00002 
+                      00003 
+                      00004 ;eeprom stuff available at reset
+                      00005  
+                      00006 
+                      00007 ;       global suppress_leading_copy
+                      00008 
+  0000                00009         global midi_min_volume_copy
+  0000                00010         global midi_assign_copy
+  0000                00011         global midi_filter_copy
+                      00012 
+                      00013 eedata  code_pack  0xf00000
+                      00014 
+                      00015 ;unsigned char midi_min_volume[] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0}; // minimum volume for each midi
+                             channel
+F00000                00016 midi_min_volume_copy
+F00000 00             00017         de 0
+F00001 00             00018         de 0
+F00002 40             00019         de 0x40
+F00003 00             00020         de 0
+F00004 00             00021         de 0
+F00005 00             00022         de 0
+F00006 00             00023         de 0
+F00007 00             00024         de 0
+F00008 00             00025         de 0
+F00009 00             00026         de 0
+F0000A 00             00027         de 0
+F0000B 00             00028         de 0
+F0000C 00             00029         de 0
+F0000D 00             00030         de 0
+F0000E 00             00031         de 0
+F0000F 00             00032         de 0
+                      00033 
+                      00034 ;unsigned char midi_assign[] = {2,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+F00010                00035 midi_assign_copy
+F00010 02             00036         de 2  ; midi 0 is assigned to channel 2
+F00011 01             00037         de 1
+F00012 02             00038         de 2
+F00013 03             00039         de 3
+F00014 04             00040         de 4
+F00015 05             00041         de 5
+F00016 06             00042         de 6
+F00017 07             00043         de 7
+F00018 08             00044         de 8
+F00019 09             00045         de 9
+F0001A 10             00046         de 10
+F0001B 11             00047         de 11
+F0001C 12             00048         de 12
+F0001D 13             00049         de 13
+F0001E 14             00050         de 14
+F0001F 15             00051         de 15
+                      00052 
+MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00053 ; MIDI filter switch               0x0a 0x0b 0x0c 0x0d 0x0e 0x0f
+                      00054 ;unsigned char midi_filter[] = {1,   1,   1,   1,   1,   1}; // default no filters
+F00020                00055 midi_filter_copy
+F00020 01             00056         de 1
+F00021 01             00057         de 1
+F00022 01             00058         de 1
+F00023 01             00059         de 1
+F00024 01             00060         de 1
+F00025 01             00061         de 1
+                      00062 
+F00026                00063 the_end
+                      00064         END                       ; directive 'end of program'
+MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__18F4320                         00000001
+midi_assign_copy                  00F00010
+midi_filter_copy                  00F00020
+midi_min_volume_copy              00F00000
+the_end                           00F00026
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

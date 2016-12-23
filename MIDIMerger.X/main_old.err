@@ -1,0 +1,11 @@
+Error[1105] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 18 : symbol 'PORTAbits' has not been defined
+Error[1151] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 18 : struct or union object designator expected
+Error[1101] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 18 : lvalue required
+Warning[2058] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 19 : call of function without prototype
+Error[1105] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 22 : symbol 'PORTAbits' has not been defined
+Error[1151] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 22 : struct or union object designator expected
+Error[1101] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 22 : lvalue required
+Warning[2058] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 23 : call of function without prototype
+Error[1105] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 28 : symbol 'EXIT_SUCCESS' has not been defined
+Warning[2052] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 28 : unexpected return value
+Error[1109] C:\Users\Hussein\OneDrive\Documents\FYDP\MIDIMerger\main_old.c 31 : type mismatch in redeclaration of 'delay_ms'
