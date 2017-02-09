@@ -64,7 +64,7 @@
 #pragma	config MCLRE = ON
 #pragma	config PBAD = DIG
 #pragma	config CCP2MX = ON
-#pragma	config DEBUG = OFF
+#pragma	config DEBUG = ON
 #pragma	config STVR = OFF
 #pragma	config CP0 = OFF
 #pragma	config CP1 = OFF
@@ -472,6 +472,9 @@ void main (void)
 
 	PORTA = 0;
 	TRISA = 0xf0; // RA3:RA0 outputs.
+//    TRISA = 0x00; // RA3:RA0 outputs.
+
+    
     
     /*
     while(1) // debug only
@@ -956,7 +959,7 @@ void InterruptHandlerHigh ()
 		suart0_count = 8; // count of bits to receive
 		suart0_in = 0;
         //0xd0
-		TMR0L = 0xff; // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
+		TMR0L = 0xff // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
 		INTCONbits.T0IF = 0; // clear TMR0 interrupt flag.
 		INTCONbits.T0IE = 1; // enable TMR0 interrupt
 	}
@@ -1005,6 +1008,7 @@ void InterruptHandlerHigh ()
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
 			bsf PORTB,7,0 // take high
+			//bsf PORTA,6,0 // take high
 
 			movlw TMR0_RELOAD // TMR0 is only 8-bit
 			movwf TMR0L,0
@@ -1015,6 +1019,7 @@ void InterruptHandlerHigh ()
 			bsf suart0_in,7,0
 
 			bcf PORTB,7,0 // debug timing bit low again
+			//bcf PORTA,6,0 // debug timing bit low again
 
 			decfsz suart0_count,1,0 // decrement bitcount and test
 			goto fin0
@@ -1029,6 +1034,10 @@ void InterruptHandlerHigh ()
 			INTCONbits.INT0IF = 0; // clr any pending INT0 interrupt
 			INTCONbits.INT0IE = 1;   // INT0 enabled
 			INTCONbits.TMR0IE = 0; // TMR0 int disabled
+            if (in_index[0] == 2) {
+                in_index[0] = 2;
+            }
+            
 
 fin0:;
 	}
@@ -1153,7 +1162,7 @@ void InterruptHandlerLow ()
 		if (--tmr2intcount == 0)
 		{
 			tmr2intcount = tmr2intcountreload; // reset counter
-			LATBbits.LATB7 = !LATBbits.LATB7; // toggle comfort IND LED on RB7
+			//LATBbits.LATB7 = !LATBbits.LATB7; // toggle comfort IND LED on RB7
 		}
 	}
 
