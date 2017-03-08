@@ -1,4 +1,4 @@
-MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  1
+MPASM 5.54                   EEPROMSTUFF.ASM   3-8-2017  12:34:08         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ F0001D 13             00049         de 13
 F0001E 14             00050         de 14
 F0001F 15             00051         de 15
                       00052 
-MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  2
+MPASM 5.54                   EEPROMSTUFF.ASM   3-8-2017  12:34:08         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -75,7 +75,7 @@ F00025 01             00061         de 1
                       00062 
 F00026                00063 the_end
                       00064         END                       ; directive 'end of program'
-MPASM 5.54                   EEPROMSTUFF.ASM   12-20-2016  21:24:49         PAGE  3
+MPASM 5.54                   EEPROMSTUFF.ASM   3-8-2017  12:34:08         PAGE  3
 
 
 SYMBOL TABLE

@@ -1,72 +1,18 @@
-//////////////////////////////////////////////////////////////////////
-//
-// main.c
-//
-// MIDI Merger (V2.00) using 18F4320
-//
-// Initial design provides for 4 channels of MIDI IN
-// routed to one MIDI OUT, plus indication on 16 LED's
-// of currently active MIDi channels
-//
-// (C) 2010 J.W.Brown & connectable.org.uk
-//
-// Based on my earlier work of seperate Merger and indicators on http://connectable.org.uk
-// Check out also: http://joebrown.org.uk for new hardware/software designs
-// Check out : http://picprojects.info for in-depth discussion of PIC code.
-//
-// First release: JWB 25th June 2010
-//
-// Facilities: autonomous 4-socket MIDI input Merger
-//				1 X Hardware UART RX
-//				3 X Start-bit triggered Software UART
-//
-//			   autonomous MIDI Output
-//				1 X Hard UART TX
-//
-//             MIDI Channel indicator on 16 LEDs.
-//             User Interface Key matrix of 16 keys, plus 1 processor RESET key.
-//             Supporting: (to date) MIDI channel re-assign
-//						    MIDI minimum volme on selected channel(s)
-//							Removal of selected MIDI commands (filter)
-//							(for example pitch-wheel storms!) 
-//	
-//
-// Release 2: JWB 9th August 2010
-//
-// Added Example EDIT Routines as follows:
-//				
-//				Program Change:   				EDIT 2 <channel> <program number> 
-//              SYSEX XG Mode ON: 				EDIT 0 (no parameters)
-//              Bank select ('normal') voices: 	EDIT 1 <channel> <bank>
-//
-//				(see code 'DoEditRoutines' for details of these routines)
-//                
-///////////////////////////////////////////////////////////////////////
 
-//
-// For the implementation as presented here, a PIC18F4320 is perfectly adequate
-// However the unit has great potential for expansion, and if you intend this
-// then use a PIC18F4620 (or similar) with much more memory.
-// I used the 18F4320 because Crownhill were selling these off for a quid (£1.00)
-// apiece - and no, they have none left as I bought their remaining stock!
-//
-// Changing PIC (to 18F4620) will mean you need to alter the names of some of the config items
-// otherwise no other changes need be made (you may want to extend addressing of EEPROM routines)
-//
 
 #include <p18cxxx.h>
 
 #pragma	config PWRT = OFF
-#pragma	config OSC = HSPLL
-#pragma config FSCM = ON        // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor enabled)
-#pragma config IESO = ON        // Internal/External Switchover bit (Internal/External Switchover mode enabled)
+// Changing PIC (to 18F4620) will mean you need to alter the names of some of the config items
+// otherwise no other changes need be made (you may want to extend addressing of E
+#pragma	config OSC = INTIO1
 #pragma	config WDT = OFF
 #pragma	config LVP = OFF
 #pragma	config BOR = ON
 #pragma	config MCLRE = ON
 #pragma	config PBAD = DIG
 #pragma	config CCP2MX = ON
-#pragma	config DEBUG = ON
+#pragma	config DEBUG = OFF
 #pragma	config STVR = OFF
 #pragma	config CP0 = OFF
 #pragma	config CP1 = OFF
@@ -95,7 +41,7 @@
 #include <stdio.h>
 
 // reminders only
-#define FOSC 40000000
+#define FOSC 8000000
 #define baudrate 31250
 
 // MIDI buffer size for each channel
@@ -128,7 +74,7 @@
 // comment the following out if no start-up tune needed
 // #define PLAY_SIGNATURE
 // comment out the following if no key matrix implemented
-//#define USER_INPUT_IMPLEMENTED
+// #define USER_INPUT_IMPLEMENTED
 
 
 // ResetTimeout MACRO
@@ -281,8 +227,6 @@ void AssignMIDIChannel(void);
 void ParamMinVolume(void);
 void FuncFilter(void);
 
-void startupLED(void);
-
 
 #if defined(PLAY_SIGNATURE)
 
@@ -308,13 +252,12 @@ void main (void)
 	unsigned char addr_mv,addr_ma,addr_mf;
     
     
-    // Page 28 in datasheet
-    // Primary oscillator selection
-    OSCCONbits.SCS0 = 0;
-    OSCCONbits.SCS1 = 0;
-    
-    // See page 28 in datasheet
-    OSCCONbits.IDLEN = 0;
+    // Osscillator settings
+    // Frequency select bits
+    // OSCCON = 111 => 8 MHz
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
     
     TRISAbits.TRISA0 = 0; // set pin as output
 
@@ -344,18 +287,20 @@ void main (void)
 	}
 
 	interpret_level = 0; // init recursion blocker
-	
+
+	//
 	// Configuration of Analog/Digital Port pins
 	// Currently no analog i/p functions are needed
 	// so all relevant pins are made digital
+	//
 	ADCON1=0x0f;
-	
+	//
 	//////////////////////////////
 	// Initialise timers 0,1,2 & 3
 	//////////////////////////////
-	
+	//
 	// TMR0, TMR1 and TMR3 are used as baud-rate clocks
-	
+	//
 	// a) Timer 0
 	// TMR0 clock source = FOSC/4 = 10.00 Mhz
 	// If we pre-scale by 1:2, the effective
@@ -381,10 +326,11 @@ void main (void)
 	// sampling exactly in the middle of each bit
 	// The priority of this interrupt is high
 	INTCON2bits.TMR0IP = 1; 
+	//
 	// Enable and disabling of the TMR0 interrupts is controlled
 	// in the high-priority edge-triggered interrupt, and TMR0
 	// interrupt routines.
-	
+	//
 	//////////////////////////////////////////////////////////////
 	//
 	// b) Timer 1
@@ -408,7 +354,7 @@ void main (void)
 	T1CON = 0x91;
 	// Interrupt priority for TMR1 is also high (see notes for TMR0 above)
 	IPR1bits.TMR1IP = 1;
-	
+	//
 	///////////////////////////////////////////////////////////////
 	//
 	// c) Timer 3
@@ -469,25 +415,15 @@ void main (void)
 	// to check the position of data bit sample points (when viewed on 'scope)
 	PORTB = 0x00; 
 	TRISB = 0x07; // RB7:RB3 outputs, RB2:RB0 inputs
-    // LED's are on RD0 and RD1
+
 	PORTD = 0;
 	TRISD = 0; // PORTD all outputs
 
-    // Port C has two probe pads
-    // RC0 and RC1
-
-    // Do we really need this? 
 	PORTA = 0;
 	TRISA = 0xf0; // RA3:RA0 outputs.
     
-    // Go through a start up sequence on the LED's
-    // The should already be set up as outputs
-    startupLED();
-    
-    
-    
-    // debug
-    /* while(1) // debug only
+    /*
+    while(1) // debug only
     {
         // RB7 has an IND LED connected, so flash it On
         PORTAbits.RA0 = 1;
@@ -500,8 +436,7 @@ void main (void)
 
         // debug only - output a 'B' on hardware UART
         //    TxMIDI ('B');
-    }  /* */
-    // end debug
+    }  /**/
 
 	// Rest of PORTA, PORTE, PORTC (other than UART)
 	// may be used by key matrix or SPI etc.
@@ -1019,7 +954,6 @@ void InterruptHandlerHigh ()
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
 			bsf PORTB,7,0 // take high
-			//bsf PORTA,6,0 // take high
 
 			movlw TMR0_RELOAD // TMR0 is only 8-bit
 			movwf TMR0L,0
@@ -1030,7 +964,6 @@ void InterruptHandlerHigh ()
 			bsf suart0_in,7,0
 
 			bcf PORTB,7,0 // debug timing bit low again
-			//bcf PORTA,6,0 // debug timing bit low again
 
 			decfsz suart0_count,1,0 // decrement bitcount and test
 			goto fin0
@@ -1045,10 +978,6 @@ void InterruptHandlerHigh ()
 			INTCONbits.INT0IF = 0; // clr any pending INT0 interrupt
 			INTCONbits.INT0IE = 1;   // INT0 enabled
 			INTCONbits.TMR0IE = 0; // TMR0 int disabled
-            if (in_index[0] == 2) {
-                in_index[0] = 2;
-            }
-            
 
 fin0:;
 	}
@@ -1152,19 +1081,18 @@ fin2:;
 	}
 
 }
-
+// I think this needs to be "interruptlow". See c18 user guide pg 33
 #pragma interrupt InterruptHandlerLow
 
 void InterruptHandlerLow ()
 {
-
-//#if defined (DISPLAY_IMPLEMENTED)
-
 	// currently TMR2 interrupt is used to flash IND LED to indicate alive
 	// and is used for key matrix debouncing
 	//
 	// This routine should be kept as minimalist as possible
-	// otherwise the software UART performance will be
+	// otherwise the software UART performance w
+
+//#if defined (DISPLAY_IMPLEMENTED)
 	// affected
 	//
 	if (PIR1bits.TMR2IF)  //check for TMR2 interrupt
@@ -1173,7 +1101,7 @@ void InterruptHandlerLow ()
 		if (--tmr2intcount == 0)
 		{
 			tmr2intcount = tmr2intcountreload; // reset counter
-			LATDbits.LATD0 = !LATDbits.LATD0; // toggle comfort IND LED on RB7
+			LATBbits.LATB7 = !LATBbits.LATB7; // toggle comfort IND LED on RB7
 		}
 	}
 
@@ -1426,6 +1354,8 @@ unsigned char RawKeyScan(void)
 	return hexstore;
 }
 
+
+
 ///////////////////////////////////
 // Delay for a couple of tmr2 ticks
 ///////////////////////////////////
@@ -1543,6 +1473,7 @@ void InterpretKeyPress(void)
 
 }
 
+
 ////////////////////////////////////
 //
 // Flash 16 LEDs in sequence in the 
@@ -1641,7 +1572,6 @@ void IndicateOnOffRequired(void)
 	}
 
 }
-
 ////////////////////////////////////
 //
 // Flash lower 10 LEDs in sequence  
@@ -1790,7 +1720,6 @@ char GetInt(int * number)
 }
 
 */
-
 /////////////////////////////////////////
 //
 // Example add-ons 1.
@@ -1959,6 +1888,8 @@ void DoEditRoutines(void)
 	FinishUI();
 
 }
+
+
 
 //////////////////////////////////////////////
 // Example add-ons 3.
@@ -2295,36 +2226,3 @@ while(1){
 	}
 }
 #endif
-
-void startupLED() {
-    // LED start up sequence
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 0;
-    delay_ms(500);
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 1;
-    delay_ms(500);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 0;
-    delay_ms(500);
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 1;
-    delay_ms(500);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 0;
-    delay_ms(500);
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 0;
-    delay_ms(500);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 1;
-    delay_ms(1000);
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 0;
-    delay_ms(250);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 1;
-    delay_ms(500);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 0;
-}
