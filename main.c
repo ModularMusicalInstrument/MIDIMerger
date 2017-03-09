@@ -110,15 +110,14 @@
 // handler.
 //////////////////////////////////////
 
-//#define TMR0_RELOAD 0x60
-//#define TMR0_RELOAD 0x6c
-//e0
-#define TMR0_RELOAD 0x60
+// TMR0 RELOAD VALUE CONFIRMED
+#define TMR0_RELOAD 0x76 // original - 0x60
 
-//#define TMR1_RELOAD 0xff70
-#define TMR1_RELOAD 0xff60
+// TMR1 RELOAD VALUE CONFIRMED
+#define TMR1_RELOAD 0xff78 // original 0xff70
 
-#define TMR3_RELOAD 0xff60
+// TMR3 RELOAD VALUE CONFIRMED
+#define TMR3_RELOAD 0xff7b // original - 0xff60
 
 #define TMR2INTCOUNTVAL 200
 #define TMR2UIINTCOUNT 50
@@ -129,6 +128,8 @@
 //#define PLAY_SIGNATURE
 // comment out the following if no key matrix implemented
 //#define USER_INPUT_IMPLEMENTED
+// comment out the following if we don't want a heart beat LED
+#define HEARTBEAT_INDICATOR
 
 
 // ResetTimeout MACRO
@@ -436,7 +437,7 @@ void main (void)
 	T2CON = 0x7f; // see DS39599C-page 127 
 	IPR1bits.TMR2IP = 0; // low priority interrupt
 
-#if defined (DISPLAY_IMPLEMENTED) || defined(USER_INPUT_IMPLEMENTED)
+#if defined(HEARTBEAT_INDICATOR) || defined (DISPLAY_IMPLEMENTED) || defined(USER_INPUT_IMPLEMENTED)
 	PIE1bits.TMR2IE = 1;
 	tmr2intcountreload = TMR2INTCOUNTVAL; // initial reload for blink (and debounce)
 	tmr2intcount = TMR2INTCOUNTVAL; // initial count for blink (and debounce)
@@ -970,7 +971,8 @@ void InterruptHandlerHigh ()
 		suart0_count = 8; // count of bits to receive
 		suart0_in = 0;
         //0xd0
-		TMR0L = 0x30; // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
+        // RELOAD VALUE CONFIRMED
+		TMR0L = 0x34; //(original 0x30) // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
 		INTCONbits.T0IF = 0; // clear TMR0 interrupt flag.
 		INTCONbits.T0IE = 1; // enable TMR0 interrupt
 	}
@@ -984,8 +986,10 @@ void InterruptHandlerHigh ()
 
 		suart1_count = 8; // count of bits to receive
 		suart1_in = 0;
+        
+        // RELOAD VALUE CONFIRMED
 		TMR1H = TMR1_RELOAD  >> 8;
-        TMR1L =  0x30; // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
+        TMR1L =  0x3b; // original - 0x30 // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
 
 		//TMR1L =  0x30; // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
 		PIR1bits.TMR1IF = 0; // clear TMR1 interrupt flag.
@@ -1003,7 +1007,8 @@ void InterruptHandlerHigh ()
 		suart2_count = 8; // count of bits to receive
 		suart2_in = 0;    // init rec byte to zero
 		TMR3H = TMR3_RELOAD >> 8;
-		TMR3L = 0x3a; // reload TMR3, plus a half-bit time to move sample point to middle of 1st bit
+		// RELOAD VALUE CONFIRMED
+        TMR3L = 0x40; // original - 0x3a // reload TMR3, plus a half-bit time to move sample point to middle of 1st bit
 		PIR2bits.TMR3IF = 0; // clear TMR3 interrupt flag.
 		PIE2bits.TMR3IE = 1; // enable TMR3 interrupt
 
@@ -1029,7 +1034,7 @@ void InterruptHandlerHigh ()
 			btfsc PORTB, 0,0    // test incoming data bit
 			bsf suart0_in,7,0
 
-			//bcf PORTB,7,0 // debug timing bit low again
+			// bcf PORTB,7,0 // debug timing bit low again
 			//bcf PORTA,6,0 // debug timing bit low again
 
 			decfsz suart0_count,1,0 // decrement bitcount and test
@@ -1065,7 +1070,9 @@ fin0:;
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
 			//bsf PORTB,7,0 // take high
+//			bsf PORTB,7,0 // take high
 
+                
 			movlw TMR1_RELOAD >> 8
 			movwf TMR1H,0  // preset TMR1 high byte
 			movlw TMR1_RELOAD
@@ -1076,7 +1083,7 @@ fin0:;
 			btfsc PORTB, 1,0    // test incoming data bit
 			bsf suart1_in,7,0
 
-			//bcf PORTB,7,0 // debug timing bit low again
+//			bcf PORTB,7,0 // debug timing bit low again
 
 			decfsz suart1_count,1,0 // decrement bitcount and test
 			goto fin1
@@ -1102,7 +1109,7 @@ fin1:;
 			// if you un-comment this, then you should disable
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
-			bsf PORTB,7,0 // take high
+			//bsf PORTB,7,0 // take high
 
 			movlw TMR3_RELOAD >> 8
 			movwf TMR3H,0 // preset TMR3 high byte
@@ -1114,7 +1121,7 @@ fin1:;
 			btfsc PORTB, 2,0    // test incoming data bit
 			bsf suart2_in,7,0
 
-			bcf PORTB,7,0 // debug timing bit low again
+			//bcf PORTB,7,0 // debug timing bit low again
 
 			decfsz suart2_count,1,0 // decrement bitcount and test
 			goto fin2
@@ -1138,7 +1145,7 @@ fin2:;
 	// I've placed this handler last, as this interrupt will be handled quicker
 	// by the PIC anyway. If you want it to be serviced as soon as possible
 	// (VERY high priority), then place it at the start of the interrupt
-	// service rountine. Be prepared to have to re-tweak the timer re-load values to compensate.
+	// service routine. Be prepared to have to re-tweak the timer re-load values to compensate.
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	if (PIR1bits.RCIF == 1) // Hardware UART RX interrupt? (Note interrupt is permanently enabled so no need to test enable flag)
@@ -2297,42 +2304,43 @@ while(1){
 #endif
 
 void startupLED() {
+    int delay = 250;
     // LED start up sequence
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 0;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 1;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
-    delay_ms(500);
+    delay_ms(delay);
   
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 1;
-    delay_ms(500);
+    delay_ms(delay);
  
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 0;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 1;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 0;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 1;
-    delay_ms(500);
+    delay_ms(delay);
 
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
