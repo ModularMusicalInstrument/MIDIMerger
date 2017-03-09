@@ -113,12 +113,12 @@
 //#define TMR0_RELOAD 0x60
 //#define TMR0_RELOAD 0x6c
 //e0
-#define TMR0_RELOAD 0xff
+#define TMR0_RELOAD 0x60
 
 //#define TMR1_RELOAD 0xff70
-#define TMR1_RELOAD 0xffe6
+#define TMR1_RELOAD 0xff60
 
-#define TMR3_RELOAD 0xff7a
+#define TMR3_RELOAD 0xff60
 
 #define TMR2INTCOUNTVAL 200
 #define TMR2UIINTCOUNT 50
@@ -126,7 +126,7 @@
 // comment the following out if no Indicator LED display is needed
 // #define DISPLAY_IMPLEMENTED
 // comment the following out if no start-up tune needed
-// #define PLAY_SIGNATURE
+//#define PLAY_SIGNATURE
 // comment out the following if no key matrix implemented
 //#define USER_INPUT_IMPLEMENTED
 
@@ -460,8 +460,8 @@ void main (void)
 				USART_EIGHT_BIT &
 				USART_CONT_RX &
 				USART_BRGH_HIGH,
-				//79 );                 // baudrate set to 31,250
-				15 );                   // baudrate set to 31,250, 15 is for 8 Mhz
+				79 );                 // baudrate set to 31,250
+				//15 );                   // baudrate set to 31,250, 15 is for 8 Mhz
 
 
 	// init 'comfort' LED indicator and rest of PortB
@@ -970,7 +970,7 @@ void InterruptHandlerHigh ()
 		suart0_count = 8; // count of bits to receive
 		suart0_in = 0;
         //0xd0
-		TMR0L = 0xff; // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
+		TMR0L = 0x30; // reload TMR0, plus a half-bit time to move sample point to middle of 1st bit
 		INTCONbits.T0IF = 0; // clear TMR0 interrupt flag.
 		INTCONbits.T0IE = 1; // enable TMR0 interrupt
 	}
@@ -985,7 +985,7 @@ void InterruptHandlerHigh ()
 		suart1_count = 8; // count of bits to receive
 		suart1_in = 0;
 		TMR1H = TMR1_RELOAD  >> 8;
-        TMR1L =  0xff; // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
+        TMR1L =  0x30; // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
 
 		//TMR1L =  0x30; // reload TMR1, plus a half-bit time to move sample point to middle of 1st bit
 		PIR1bits.TMR1IF = 0; // clear TMR1 interrupt flag.
@@ -1018,7 +1018,7 @@ void InterruptHandlerHigh ()
 			// if you un-comment this, then you should disable
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
-			bsf PORTB,7,0 // take high
+			//bsf PORTB,7,0 // take high
 			//bsf PORTA,6,0 // take high
 
 			movlw TMR0_RELOAD // TMR0 is only 8-bit
@@ -1029,7 +1029,7 @@ void InterruptHandlerHigh ()
 			btfsc PORTB, 0,0    // test incoming data bit
 			bsf suart0_in,7,0
 
-			bcf PORTB,7,0 // debug timing bit low again
+			//bcf PORTB,7,0 // debug timing bit low again
 			//bcf PORTA,6,0 // debug timing bit low again
 
 			decfsz suart0_count,1,0 // decrement bitcount and test
@@ -1064,7 +1064,7 @@ fin0:;
 			// if you un-comment this, then you should disable
 			// the toggling of this bit in the low-priority interrupt handler.
 			// to get a correct 'scope trace
-			bsf PORTB,7,0 // take high
+			//bsf PORTB,7,0 // take high
 
 			movlw TMR1_RELOAD >> 8
 			movwf TMR1H,0  // preset TMR1 high byte
@@ -1076,7 +1076,7 @@ fin0:;
 			btfsc PORTB, 1,0    // test incoming data bit
 			bsf suart1_in,7,0
 
-			bcf PORTB,7,0 // debug timing bit low again
+			//bcf PORTB,7,0 // debug timing bit low again
 
 			decfsz suart1_count,1,0 // decrement bitcount and test
 			goto fin1
@@ -1252,7 +1252,7 @@ void delay_ms(int count)
 	int i;	
 	for (i = 0; i < count; i++)
 	{
-		Delay1KTCYx(2);
+		Delay1KTCYx(10);
 	}
 }
 
@@ -1261,7 +1261,7 @@ void delay_us(int count)
 	int i;	
 	for (i = 0; i < count; i++)
 	{
-		Delay1TCY();
+		Delay10TCYx(1);
 	}
 }
 
@@ -2162,9 +2162,17 @@ while(1){
 		}
     */
         TxMIDI(0x92);
-        TxMIDI(0x30);       
+        TxMIDI(0x3c);       
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		
+        TxMIDI(0x82);
+		TxMIDI(0x30);
+		TxMIDI(0x00);
+	
+		TxMIDI(0x92);
+		TxMIDI(0x30);
+		TxMIDI(0x7f);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x30);
 		TxMIDI(0x00);
@@ -2172,7 +2180,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x30);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x30);
 		TxMIDI(0x00);
@@ -2180,15 +2188,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x30);
 		TxMIDI(0x7f);
-		delay_ms(1000);
-		TxMIDI(0x82);
-		TxMIDI(0x30);
-		TxMIDI(0x00);
-	
-		TxMIDI(0x92);
-		TxMIDI(0x30);
-		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x30);
 		TxMIDI(0x00);
@@ -2197,7 +2197,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x33);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x33);
 		TxMIDI(0x00);
@@ -2205,7 +2205,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x33);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x33);
 		TxMIDI(0x00);
@@ -2213,7 +2213,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x30);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x30);
 		TxMIDI(0x00);
@@ -2221,7 +2221,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x30);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x30);
 		TxMIDI(0x00);
@@ -2229,7 +2229,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2237,7 +2237,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2245,7 +2245,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2253,7 +2253,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2263,7 +2263,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2e);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2e);
 		TxMIDI(0x00);
@@ -2271,7 +2271,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2e);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2e);
 		TxMIDI(0x00);
@@ -2279,7 +2279,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2287,7 +2287,7 @@ while(1){
 		TxMIDI(0x92);
 		TxMIDI(0x2b);
 		TxMIDI(0x7f);
-		delay_ms(1000);
+		delay_ms(500);
 		TxMIDI(0x82);
 		TxMIDI(0x2b);
 		TxMIDI(0x00);
@@ -2301,30 +2301,39 @@ void startupLED() {
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 0;
     delay_ms(500);
+
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 1;
     delay_ms(500);
+
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
     delay_ms(500);
+  
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 1;
     delay_ms(500);
+ 
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
     delay_ms(500);
+
     PORTDbits.RD0 = 0;
     PORTDbits.RD1 = 0;
     delay_ms(500);
-    PORTDbits.RD0 = 1;
-    PORTDbits.RD1 = 1;
-    delay_ms(1000);
-    PORTDbits.RD0 = 0;
-    PORTDbits.RD1 = 0;
-    delay_ms(250);
+
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 1;
     delay_ms(500);
+
+    PORTDbits.RD0 = 0;
+    PORTDbits.RD1 = 0;
+    delay_ms(500);
+
+    PORTDbits.RD0 = 1;
+    PORTDbits.RD1 = 1;
+    delay_ms(500);
+
     PORTDbits.RD0 = 1;
     PORTDbits.RD1 = 0;
 }
