@@ -1,5 +1,5 @@
 MPLINK 5.00, LINKER
-Linker Map File - Created Wed Mar 08 12:34:10 2017
+Linker Map File - Created Thu Mar 09 17:06:52 2017
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -27,16 +27,17 @@ Linker Map File - Created Wed Mar 08 12:34:10 2017
          .idata_c018i.o_i    romdata   0x000014    program   0x000000
           InterruptVector       code   0x000018    program   0x000006
                    .cinit    romdata   0x00001e    program   0x00000e
-             .code_main.o       code   0x00002c    program   0x000bf4
-               _cinit_scn       code   0x000c20    program   0x00009e
-                 UARTCODE       code   0x000cbe    program   0x000088
-            .code_uopen.o       code   0x000d46    program   0x00007a
-         .code_putsuart.o       code   0x000dc0    program   0x00003c
-           .code_uwrite.o       code   0x000dfc    program   0x00002e
-              D1KTCYXCODE       code   0x000e2a    program   0x000020
-                    .code       code   0x000e4a    program   0x000020
-             _startup_scn       code   0x000e6a    program   0x00001c
-          .idata_main.o_i    romdata   0x000e86    program   0x00002e
+             .code_main.o       code   0x00002c    program   0x000c28
+               _cinit_scn       code   0x000c54    program   0x00009e
+                 UARTCODE       code   0x000cf2    program   0x000088
+            .code_uopen.o       code   0x000d7a    program   0x00007a
+         .code_putsuart.o       code   0x000df4    program   0x00003c
+           .code_uwrite.o       code   0x000e30    program   0x00002e
+              D1KTCYXCODE       code   0x000e5e    program   0x000020
+                    .code       code   0x000e7e    program   0x000020
+             _startup_scn       code   0x000e9e    program   0x00001c
+              D10TCYXCODE       code   0x000eba    program   0x000016
+          .idata_main.o_i    romdata   0x000ed0    program   0x00002e
     .config_300001_main.o    romdata   0x300001    program   0x000001
     .config_300002_main.o    romdata   0x300002    program   0x000001
     .config_300003_main.o    romdata   0x300003    program   0x000001
@@ -79,108 +80,110 @@ Linker Map File - Created Wed Mar 08 12:34:10 2017
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000013      
-                            0x000018    0x000eb3      
+                            0x000018    0x000efd      
                             0x300001    0x300003      
                             0x300005    0x300006      
                             0x300008    0x30000d      
                             0xf00000    0xf00025      
-            3809 out of 8472 program addresses used, program memory utilization is 44%
+            3883 out of 8472 program addresses used, program memory utilization is 45%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                     CMax   0x0005e2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                    D1K_1   0x000e36    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000e34    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-              Delay1KTCYx   0x000e2a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                     CMax   0x0005f0    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                    D10_1   0x000eca    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+                     D10x   0x000ec2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+                    D1K_1   0x000e6a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x000e68    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+              Delay10TCYx   0x000eba    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+              Delay1KTCYx   0x000e5e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
            DelayRXBitUART   0x000010    program     extern C:\PICPRJ\NewMIDIMerger\SoftwareUARTDelays.c
        DelayRXHalfBitUART   0x00000e    program     extern C:\PICPRJ\NewMIDIMerger\SoftwareUARTDelays.c
            DelayTXBitUART   0x000012    program     extern C:\PICPRJ\NewMIDIMerger\SoftwareUARTDelays.c
-                  GetChar   0x000d1e    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
-     InterruptHandlerHigh   0x00062e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-      InterruptHandlerLow   0x0007a2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                  GetChar   0x000d52    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
+     InterruptHandlerHigh   0x00063c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+      InterruptHandlerLow   0x0007a8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
       InterruptVectorHigh   0x000008    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
        InterruptVectorLow   0x000018    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 OpenUART   0x000cbe    program     extern C:\PICPRJ\NewMIDIMerger\openuart.asm
-                OpenUSART   0x000d46    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uopen.c
-               ReadEEPROM   0x000a36    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-            ReadEEPROMInt   0x000b08    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-      ReadEEPROMShortLong   0x000a5c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 ReadUART   0x000d04    program     extern C:\PICPRJ\NewMIDIMerger\readuart.asm
-                  SendBit   0x000ce0    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
-                SendStart   0x000ce4    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
-                   TxMIDI   0x000888    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 WaitChar   0x000d0c    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
-              WriteEEPROM   0x0008a8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-           WriteEEPROMInt   0x0009c8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-     WriteEEPROMShortLong   0x00091e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                WriteUART   0x000ccc    program     extern C:\PICPRJ\NewMIDIMerger\writuart.asm
-               WriteUSART   0x000dfc    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uwrite.c
-        _D1KTCYXCODE_0010   0x000e3a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000e40    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-         ___else_lbl00017   0x0003da    program     static                          
-         ___else_lbl00019   0x00033e    program     static                          
-         ___else_lbl00022   0x0004ae    program     static                          
-         ___else_lbl00025   0x00041c    program     static                          
-         ___else_lbl00031   0x000526    program     static                          
-         ___else_lbl00033   0x0003f8    program     static                          
-         ___else_lbl00035   0x0005b0    program     static                          
-         ___else_lbl00037   0x0005a2    program     static                          
+                 OpenUART   0x000cf2    program     extern C:\PICPRJ\NewMIDIMerger\openuart.asm
+                OpenUSART   0x000d7a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uopen.c
+               ReadEEPROM   0x000a44    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+            ReadEEPROMInt   0x000b16    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+      ReadEEPROMShortLong   0x000a6a    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                 ReadUART   0x000d38    program     extern C:\PICPRJ\NewMIDIMerger\readuart.asm
+                  SendBit   0x000d14    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
+                SendStart   0x000d18    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
+                   TxMIDI   0x000896    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                 WaitChar   0x000d40    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
+              WriteEEPROM   0x0008b6    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+           WriteEEPROMInt   0x0009d6    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+     WriteEEPROMShortLong   0x00092c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                WriteUART   0x000d00    program     extern C:\PICPRJ\NewMIDIMerger\writuart.asm
+               WriteUSART   0x000e30    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uwrite.c
+        _D10TCYXCODE_000A   0x000ec4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x000ec6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x000ec8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D1KTCYXCODE_0010   0x000e6e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x000e74    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+         ___else_lbl00017   0x0003e8    program     static                          
+         ___else_lbl00019   0x00034c    program     static                          
+         ___else_lbl00022   0x0004bc    program     static                          
+         ___else_lbl00025   0x00042a    program     static                          
+         ___else_lbl00031   0x000534    program     static                          
+         ___else_lbl00033   0x000406    program     static                          
+         ___else_lbl00035   0x0005be    program     static                          
+         ___else_lbl00037   0x0005b0    program     static                          
           ___for_lbl00001   0x0000a6    program     static                          
           ___for_lbl00002   0x0000b2    program     static                          
           ___for_lbl00003   0x000048    program     static                          
           ___for_lbl00004   0x0001b8    program     static                          
           ___for_lbl00005   0x0001c2    program     static                          
           ___for_lbl00007   0x0000d4    program     static                          
-          ___for_lbl00010   0x0005c0    program     static                          
-          ___for_lbl00011   0x0005cc    program     static                          
-          ___for_lbl00039   0x000228    program     static                          
-          ___for_lbl00082   0x00086a    program     static                          
-          ___for_lbl00083   0x000874    program     static                          
-          ___for_lbl00084   0x00083e    program     static                          
+          ___for_lbl00010   0x0005ce    program     static                          
+          ___for_lbl00011   0x0005da    program     static                          
+          ___for_lbl00039   0x000236    program     static                          
            ___if_lbl00006   0x0001b8    program     static                          
-           ___if_lbl00014   0x00032a    program     static                          
-           ___if_lbl00015   0x0003d8    program     static                          
-           ___if_lbl00016   0x0003e2    program     static                          
-           ___if_lbl00018   0x0003ee    program     static                          
-           ___if_lbl00020   0x0004ac    program     static                          
-           ___if_lbl00021   0x0004ca    program     static                          
-           ___if_lbl00023   0x0004ca    program     static                          
-           ___if_lbl00024   0x0004ca    program     static                          
-           ___if_lbl00026   0x000524    program     static                          
-           ___if_lbl00028   0x000590    program     static                          
-           ___if_lbl00029   0x000590    program     static                          
-           ___if_lbl00030   0x000598    program     static                          
-           ___if_lbl00032   0x0005a0    program     static                          
-           ___if_lbl00034   0x0005b2    program     static                          
-           ___if_lbl00036   0x0005b2    program     static                          
-           ___if_lbl00038   0x0005c0    program     static                          
-           ___if_lbl00057   0x00065c    program     static                          
-           ___if_lbl00059   0x00067a    program     static                          
-           ___if_lbl00061   0x00069a    program     static                          
-           ___if_lbl00063   0x0006d6    program     static                          
-           ___if_lbl00064   0x0006e6    program     static                          
-           ___if_lbl00065   0x0006e6    program     static                          
-           ___if_lbl00067   0x000726    program     static                          
-           ___if_lbl00068   0x00072c    program     static                          
-           ___if_lbl00070   0x00076c    program     static                          
-           ___if_lbl00071   0x000772    program     static                          
-           ___if_lbl00072   0x000792    program     static                          
-           ___if_lbl00073   0x000792    program     static                          
+           ___if_lbl00014   0x000338    program     static                          
+           ___if_lbl00015   0x0003e6    program     static                          
+           ___if_lbl00016   0x0003f0    program     static                          
+           ___if_lbl00018   0x0003fc    program     static                          
+           ___if_lbl00020   0x0004ba    program     static                          
+           ___if_lbl00021   0x0004d8    program     static                          
+           ___if_lbl00023   0x0004d8    program     static                          
+           ___if_lbl00024   0x0004d8    program     static                          
+           ___if_lbl00026   0x000532    program     static                          
+           ___if_lbl00028   0x00059e    program     static                          
+           ___if_lbl00029   0x00059e    program     static                          
+           ___if_lbl00030   0x0005a6    program     static                          
+           ___if_lbl00032   0x0005ae    program     static                          
+           ___if_lbl00034   0x0005c0    program     static                          
+           ___if_lbl00036   0x0005c0    program     static                          
+           ___if_lbl00038   0x0005ce    program     static                          
+           ___if_lbl00057   0x00066c    program     static                          
+           ___if_lbl00059   0x00068c    program     static                          
+           ___if_lbl00061   0x0006ac    program     static                          
+           ___if_lbl00063   0x0006e4    program     static                          
+           ___if_lbl00064   0x0006f4    program     static                          
+           ___if_lbl00065   0x0006f4    program     static                          
+           ___if_lbl00067   0x000730    program     static                          
+           ___if_lbl00068   0x000736    program     static                          
+           ___if_lbl00070   0x000772    program     static                          
+           ___if_lbl00071   0x000778    program     static                          
+           ___if_lbl00072   0x000798    program     static                          
+           ___if_lbl00073   0x000798    program     static                          
+       ___return_lbl00000   0x0005dc    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00000   0x0005ce    program     static                          
-       ___return_lbl00001   0x000e84    program     static                          
-       ___return_lbl00002   0x000cbc    program     static                          
+       ___return_lbl00001   0x000eb8    program     static                          
+       ___return_lbl00002   0x000cf0    program     static                          
        ___return_lbl00053   0x00000c    program     static                          
        ___return_lbl00054   0x00001c    program     static                          
-       ___return_lbl00055   0x000792    program     static                          
-       ___return_lbl00081   0x000874    program     static                          
-        ___while_lbl00008   0x000220    program     static                          
-        ___while_lbl00009   0x0005ce    program     static                          
-        ___while_lbl00012   0x000276    program     static                          
-        ___while_lbl00013   0x0005b4    program     static                          
+       ___return_lbl00055   0x000798    program     static                          
+        ___while_lbl00008   0x00022e    program     static                          
+        ___while_lbl00009   0x0005dc    program     static                          
+        ___while_lbl00012   0x000284    program     static                          
+        ___while_lbl00013   0x0005c2    program     static                          
                __config_0   0x300001    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
                __config_1   0x300002    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
               __config_10   0x30000d    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
@@ -193,47 +196,46 @@ Linker Map File - Created Wed Mar 08 12:34:10 2017
                __config_8   0x30000b    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
                __config_9   0x30000c    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
                    __init   0x000006    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
-               __tmplbl_0   0x000564    program     static                          
-               __tmplbl_1   0x00055e    program     static                          
-              __tmplbl_10   0x0006f2    program     static                          
-              __tmplbl_11   0x0006ec    program     static                          
-              __tmplbl_12   0x000738    program     static                          
-              __tmplbl_13   0x000732    program     static                          
-              __tmplbl_16   0x00085e    program     static                          
-               __tmplbl_2   0x00064c    program     static                          
-               __tmplbl_3   0x000646    program     static                          
-               __tmplbl_4   0x000668    program     static                          
-               __tmplbl_5   0x000662    program     static                          
-               __tmplbl_6   0x000686    program     static                          
-               __tmplbl_7   0x000680    program     static                          
-               __tmplbl_8   0x0006a6    program     static                          
-               __tmplbl_9   0x0006a0    program     static                          
-            __zero_memory   0x000e4a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                _do_cinit   0x000c20    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+               __tmplbl_0   0x000572    program     static                          
+               __tmplbl_1   0x00056c    program     static                          
+              __tmplbl_10   0x000700    program     static                          
+              __tmplbl_11   0x0006fa    program     static                          
+              __tmplbl_12   0x000742    program     static                          
+              __tmplbl_13   0x00073c    program     static                          
+               __tmplbl_2   0x00065a    program     static                          
+               __tmplbl_3   0x000654    program     static                          
+               __tmplbl_4   0x000678    program     static                          
+               __tmplbl_5   0x000672    program     static                          
+               __tmplbl_6   0x000698    program     static                          
+               __tmplbl_7   0x000692    program     static                          
+               __tmplbl_8   0x0006b8    program     static                          
+               __tmplbl_9   0x0006b2    program     static                          
+            __zero_memory   0x000e7e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                _do_cinit   0x000c54    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                 _startup   0x000e6a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                compare_l   0x000e60    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                copy_loop   0x000c92    program     static                          
-            copy_one_byte   0x000c98    program     static                          
-                 delay_ms   0x0007cc    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 delay_us   0x00082e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                     done   0x000cbc    program     static                          
-             done_copying   0x000ca6    program     static                          
-                     fin0   0x0006e6    program     static                          
-                     fin1   0x00072c    program     static                          
-                     fin2   0x000772    program     static                          
-                     loop   0x000e7a    program     static                          
-                   loop_h   0x000e58    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                   loop_l   0x000e62    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                 _startup   0x000e9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                compare_l   0x000e94    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                copy_loop   0x000cc6    program     static                          
+            copy_one_byte   0x000ccc    program     static                          
+                 delay_ms   0x0007d2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                 delay_us   0x000834    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                     done   0x000cf0    program     static                          
+             done_copying   0x000cda    program     static                          
+                     fin0   0x0006f4    program     static                          
+                     fin1   0x000736    program     static                          
+                     fin2   0x000778    program     static                          
+                     loop   0x000eae    program     static                          
+                   loop_h   0x000e8c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                   loop_l   0x000e96    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
                      main   0x00002c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
          midi_assign_copy   0xf00010    program     extern ..\eepromstuff.asm       
          midi_filter_copy   0xf00020    program     extern ..\eepromstuff.asm       
      midi_min_volume_copy   0xf00000    program     extern ..\eepromstuff.asm       
-                 putsUART   0x000dc0    program     extern C:\PICPRJ\NewMIDIMerger\putsuart.c
-               startupLED   0x000b7a    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                     test   0x000c3a    program     static                          
+                 putsUART   0x000df4    program     extern C:\PICPRJ\NewMIDIMerger\putsuart.c
+               startupLED   0x000b88    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                     test   0x000c6e    program     static                          
                   the_end   0xf00026    program     static ..\eepromstuff.asm       
-               zero_block   0x000e58    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+               zero_block   0x000e8c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
                    ADCON0   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
                ADCON0bits   0x000fc2       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
                    ADCON1   0x000fc1       data     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
@@ -486,119 +488,120 @@ Linker Map File - Created Wed Mar 08 12:34:10 2017
           ___for_lbl00001   0x0000a6    program     static                          
           ___for_lbl00002   0x0000b2    program     static                          
           ___for_lbl00007   0x0000d4    program     static                          
-          ___for_lbl00004   0x0001b8    program     static                          
            ___if_lbl00006   0x0001b8    program     static                          
+          ___for_lbl00004   0x0001b8    program     static                          
           ___for_lbl00005   0x0001c2    program     static                          
-        ___while_lbl00008   0x000220    program     static                          
-          ___for_lbl00039   0x000228    program     static                          
-        ___while_lbl00012   0x000276    program     static                          
-           ___if_lbl00014   0x00032a    program     static                          
-         ___else_lbl00019   0x00033e    program     static                          
-           ___if_lbl00015   0x0003d8    program     static                          
-         ___else_lbl00017   0x0003da    program     static                          
-           ___if_lbl00016   0x0003e2    program     static                          
-           ___if_lbl00018   0x0003ee    program     static                          
-         ___else_lbl00033   0x0003f8    program     static                          
-         ___else_lbl00025   0x00041c    program     static                          
-           ___if_lbl00020   0x0004ac    program     static                          
-         ___else_lbl00022   0x0004ae    program     static                          
-           ___if_lbl00024   0x0004ca    program     static                          
-           ___if_lbl00023   0x0004ca    program     static                          
-           ___if_lbl00021   0x0004ca    program     static                          
-           ___if_lbl00026   0x000524    program     static                          
-         ___else_lbl00031   0x000526    program     static                          
-               __tmplbl_1   0x00055e    program     static                          
-               __tmplbl_0   0x000564    program     static                          
-           ___if_lbl00028   0x000590    program     static                          
-           ___if_lbl00029   0x000590    program     static                          
-           ___if_lbl00030   0x000598    program     static                          
-           ___if_lbl00032   0x0005a0    program     static                          
-         ___else_lbl00037   0x0005a2    program     static                          
-         ___else_lbl00035   0x0005b0    program     static                          
-           ___if_lbl00034   0x0005b2    program     static                          
-           ___if_lbl00036   0x0005b2    program     static                          
-        ___while_lbl00013   0x0005b4    program     static                          
-           ___if_lbl00038   0x0005c0    program     static                          
-          ___for_lbl00010   0x0005c0    program     static                          
-          ___for_lbl00011   0x0005cc    program     static                          
-       ___return_lbl00000   0x0005ce    program     static                          
-        ___while_lbl00009   0x0005ce    program     static                          
-                     CMax   0x0005e2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-     InterruptHandlerHigh   0x00062e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-               __tmplbl_3   0x000646    program     static                          
-               __tmplbl_2   0x00064c    program     static                          
-           ___if_lbl00057   0x00065c    program     static                          
-               __tmplbl_5   0x000662    program     static                          
-               __tmplbl_4   0x000668    program     static                          
-           ___if_lbl00059   0x00067a    program     static                          
-               __tmplbl_7   0x000680    program     static                          
-               __tmplbl_6   0x000686    program     static                          
-           ___if_lbl00061   0x00069a    program     static                          
-               __tmplbl_9   0x0006a0    program     static                          
-               __tmplbl_8   0x0006a6    program     static                          
-           ___if_lbl00063   0x0006d6    program     static                          
-                     fin0   0x0006e6    program     static                          
-           ___if_lbl00065   0x0006e6    program     static                          
-           ___if_lbl00064   0x0006e6    program     static                          
-              __tmplbl_11   0x0006ec    program     static                          
-              __tmplbl_10   0x0006f2    program     static                          
-           ___if_lbl00067   0x000726    program     static                          
-                     fin1   0x00072c    program     static                          
-           ___if_lbl00068   0x00072c    program     static                          
-              __tmplbl_13   0x000732    program     static                          
-              __tmplbl_12   0x000738    program     static                          
-           ___if_lbl00070   0x00076c    program     static                          
-                     fin2   0x000772    program     static                          
-           ___if_lbl00071   0x000772    program     static                          
-           ___if_lbl00072   0x000792    program     static                          
-           ___if_lbl00073   0x000792    program     static                          
-       ___return_lbl00055   0x000792    program     static                          
-      InterruptHandlerLow   0x0007a2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 delay_ms   0x0007cc    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                 delay_us   0x00082e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-          ___for_lbl00084   0x00083e    program     static                          
-              __tmplbl_16   0x00085e    program     static                          
-          ___for_lbl00082   0x00086a    program     static                          
-          ___for_lbl00083   0x000874    program     static                          
-       ___return_lbl00081   0x000874    program     static                          
-                   TxMIDI   0x000888    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-              WriteEEPROM   0x0008a8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-     WriteEEPROMShortLong   0x00091e    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-           WriteEEPROMInt   0x0009c8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-               ReadEEPROM   0x000a36    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-      ReadEEPROMShortLong   0x000a5c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-            ReadEEPROMInt   0x000b08    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-               startupLED   0x000b7a    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
-                _do_cinit   0x000c20    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     test   0x000c3a    program     static                          
-                copy_loop   0x000c92    program     static                          
-            copy_one_byte   0x000c98    program     static                          
-             done_copying   0x000ca6    program     static                          
-                     done   0x000cbc    program     static                          
-       ___return_lbl00002   0x000cbc    program     static                          
-                 OpenUART   0x000cbe    program     extern C:\PICPRJ\NewMIDIMerger\openuart.asm
-                WriteUART   0x000ccc    program     extern C:\PICPRJ\NewMIDIMerger\writuart.asm
-                  SendBit   0x000ce0    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
-                SendStart   0x000ce4    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
-                 ReadUART   0x000d04    program     extern C:\PICPRJ\NewMIDIMerger\readuart.asm
-                 WaitChar   0x000d0c    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
-                  GetChar   0x000d1e    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
-                OpenUSART   0x000d46    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uopen.c
-                 putsUART   0x000dc0    program     extern C:\PICPRJ\NewMIDIMerger\putsuart.c
-               WriteUSART   0x000dfc    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uwrite.c
-              Delay1KTCYx   0x000e2a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000e34    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                    D1K_1   0x000e36    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0010   0x000e3a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000e40    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-            __zero_memory   0x000e4a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-               zero_block   0x000e58    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                   loop_h   0x000e58    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                compare_l   0x000e60    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                   loop_l   0x000e62    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
-                 _startup   0x000e6a    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     loop   0x000e7a    program     static                          
-       ___return_lbl00001   0x000e84    program     static                          
+        ___while_lbl00008   0x00022e    program     static                          
+          ___for_lbl00039   0x000236    program     static                          
+        ___while_lbl00012   0x000284    program     static                          
+           ___if_lbl00014   0x000338    program     static                          
+         ___else_lbl00019   0x00034c    program     static                          
+           ___if_lbl00015   0x0003e6    program     static                          
+         ___else_lbl00017   0x0003e8    program     static                          
+           ___if_lbl00016   0x0003f0    program     static                          
+           ___if_lbl00018   0x0003fc    program     static                          
+         ___else_lbl00033   0x000406    program     static                          
+         ___else_lbl00025   0x00042a    program     static                          
+           ___if_lbl00020   0x0004ba    program     static                          
+         ___else_lbl00022   0x0004bc    program     static                          
+           ___if_lbl00021   0x0004d8    program     static                          
+           ___if_lbl00023   0x0004d8    program     static                          
+           ___if_lbl00024   0x0004d8    program     static                          
+           ___if_lbl00026   0x000532    program     static                          
+         ___else_lbl00031   0x000534    program     static                          
+               __tmplbl_1   0x00056c    program     static                          
+               __tmplbl_0   0x000572    program     static                          
+           ___if_lbl00029   0x00059e    program     static                          
+           ___if_lbl00028   0x00059e    program     static                          
+           ___if_lbl00030   0x0005a6    program     static                          
+           ___if_lbl00032   0x0005ae    program     static                          
+         ___else_lbl00037   0x0005b0    program     static                          
+         ___else_lbl00035   0x0005be    program     static                          
+           ___if_lbl00034   0x0005c0    program     static                          
+           ___if_lbl00036   0x0005c0    program     static                          
+        ___while_lbl00013   0x0005c2    program     static                          
+          ___for_lbl00010   0x0005ce    program     static                          
+           ___if_lbl00038   0x0005ce    program     static                          
+          ___for_lbl00011   0x0005da    program     static                          
+       ___return_lbl00000   0x0005dc    program     static                          
+        ___while_lbl00009   0x0005dc    program     static                          
+                     CMax   0x0005f0    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+     InterruptHandlerHigh   0x00063c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+               __tmplbl_3   0x000654    program     static                          
+               __tmplbl_2   0x00065a    program     static                          
+           ___if_lbl00057   0x00066c    program     static                          
+               __tmplbl_5   0x000672    program     static                          
+               __tmplbl_4   0x000678    program     static                          
+           ___if_lbl00059   0x00068c    program     static                          
+               __tmplbl_7   0x000692    program     static                          
+               __tmplbl_6   0x000698    program     static                          
+           ___if_lbl00061   0x0006ac    program     static                          
+               __tmplbl_9   0x0006b2    program     static                          
+               __tmplbl_8   0x0006b8    program     static                          
+           ___if_lbl00063   0x0006e4    program     static                          
+                     fin0   0x0006f4    program     static                          
+           ___if_lbl00065   0x0006f4    program     static                          
+           ___if_lbl00064   0x0006f4    program     static                          
+              __tmplbl_11   0x0006fa    program     static                          
+              __tmplbl_10   0x000700    program     static                          
+           ___if_lbl00067   0x000730    program     static                          
+                     fin1   0x000736    program     static                          
+           ___if_lbl00068   0x000736    program     static                          
+              __tmplbl_13   0x00073c    program     static                          
+              __tmplbl_12   0x000742    program     static                          
+           ___if_lbl00070   0x000772    program     static                          
+                     fin2   0x000778    program     static                          
+           ___if_lbl00071   0x000778    program     static                          
+           ___if_lbl00072   0x000798    program     static                          
+           ___if_lbl00073   0x000798    program     static                          
+       ___return_lbl00055   0x000798    program     static                          
+      InterruptHandlerLow   0x0007a8    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                 delay_ms   0x0007d2    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                 delay_us   0x000834    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                   TxMIDI   0x000896    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+              WriteEEPROM   0x0008b6    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+     WriteEEPROMShortLong   0x00092c    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+           WriteEEPROMInt   0x0009d6    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+               ReadEEPROM   0x000a44    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+      ReadEEPROMShortLong   0x000a6a    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+            ReadEEPROMInt   0x000b16    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+               startupLED   0x000b88    program     extern C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
+                _do_cinit   0x000c54    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     test   0x000c6e    program     static                          
+                copy_loop   0x000cc6    program     static                          
+            copy_one_byte   0x000ccc    program     static                          
+             done_copying   0x000cda    program     static                          
+                     done   0x000cf0    program     static                          
+       ___return_lbl00002   0x000cf0    program     static                          
+                 OpenUART   0x000cf2    program     extern C:\PICPRJ\NewMIDIMerger\openuart.asm
+                WriteUART   0x000d00    program     extern C:\PICPRJ\NewMIDIMerger\writuart.asm
+                  SendBit   0x000d14    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
+                SendStart   0x000d18    program     static C:\PICPRJ\NewMIDIMerger\writuart.asm
+                 ReadUART   0x000d38    program     extern C:\PICPRJ\NewMIDIMerger\readuart.asm
+                 WaitChar   0x000d40    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
+                  GetChar   0x000d52    program     static C:\PICPRJ\NewMIDIMerger\readuart.asm
+                OpenUSART   0x000d7a    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uopen.c
+                 putsUART   0x000df4    program     extern C:\PICPRJ\NewMIDIMerger\putsuart.c
+               WriteUSART   0x000e30    program     extern E:\3.46\pic18-lt\cxx-framework\src\pmc_common\USART\uwrite.c
+              Delay1KTCYx   0x000e5e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x000e68    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                    D1K_1   0x000e6a    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0010   0x000e6e    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x000e74    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+            __zero_memory   0x000e7e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+               zero_block   0x000e8c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                   loop_h   0x000e8c    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                compare_l   0x000e94    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                   loop_l   0x000e96    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f4320.asm
+                 _startup   0x000e9e    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     loop   0x000eae    program     static                          
+       ___return_lbl00001   0x000eb8    program     static                          
+              Delay10TCYx   0x000eba    program     extern E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+                     D10x   0x000ec2    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000A   0x000ec4    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x000ec6    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x000ec8    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
+                    D10_1   0x000eca    program     static E:\3.46\pic18-lt\cxx-framework\src\traditional\delays\d10tcyx.asm
                __config_0   0x300001    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
                __config_1   0x300002    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
                __config_2   0x300003    program     static C:\Users\Hussein\OneDrive\Documents\FYDP\Software\MIDIMerger\main.c
